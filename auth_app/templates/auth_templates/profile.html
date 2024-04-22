@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}User Profile{% endblock %}
+{% block content %}
+    <h1>User Profile</h1>
+    <p>Phone Number: {{ user.phone_number }}</p>
+    {% if not user.activated_invite_code %}
+        <h2>Activate Invite Code</h2>
+        <form method="POST"">
+            {% csrf_token %}
+            <input type="text" name="invite_code" placeholder="Enter Invite Code">
+            <button type="submit">Activate</button>
+        </form>
+    {% else %}
+        <p>Activated Invite Code: {{ user.activated_invite_code }}</p>
+    {% endif %}
+{% endblock %}
